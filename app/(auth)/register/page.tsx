@@ -32,7 +32,8 @@ function RegisterContent() {
         setError(msg)
         return
       }
-      router.push(`/verify?email=${encodeURIComponent(form.email)}`)
+      /* OTP DISABLED router.push(`/verify?email=${encodeURIComponent(form.email)}`) */
+      router.push('/login')
     } catch {
       setError('Sem conexão com o servidor')
     } finally {
