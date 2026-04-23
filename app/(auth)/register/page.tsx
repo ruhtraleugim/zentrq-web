@@ -28,7 +28,12 @@ function RegisterContent() {
       })
       if (!res.ok) {
         const err = await res.json().catch(() => ({}))
-        setError(err.message ?? 'Erro ao cadastrar')
+        const msg = err.detail ?? err.message ?? 'Erro ao cadastrar'
+        if (msg === 'Email não verificado') {
+          router.push(`/verify?email=${encodeURIComponent(form.email)}`)
+          return
+        }
+        setError(msg)
         return
       }
       router.push(`/verify?email=${encodeURIComponent(form.email)}`)

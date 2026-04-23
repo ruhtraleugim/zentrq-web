@@ -27,7 +27,12 @@ export default function LoginPage() {
       })
       if (!authRes.ok) {
         const err = await authRes.json().catch(() => ({}))
-        setError(err.message ?? 'Credenciais inválidas')
+        const msg = err.detail ?? err.message ?? 'Credenciais inválidas'
+        if (msg === 'Email não verificado') {
+          router.push(`/verify?email=${encodeURIComponent(form.email)}`)
+          return
+        }
+        setError(msg)
         return
       }
       const { role } = await authRes.json()
