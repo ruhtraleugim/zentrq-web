@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     console.log('BODY:', body)
 
-    const backendRes = await fetch(`http://localhost:8080/auth/verify`, {
+    const backendRes = await fetch(`${process.env.API_URL}/auth/verify`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
